@@ -1,14 +1,16 @@
 package camt.se331.shoppingcart.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import org.hibernate.annotations.Cascade;
+
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by Dto on 2/7/2015.
  */
 @Entity
-public class Product implements Comparable{
+public class Product implements Comparable {
     @Id
     @GeneratedValue
     Long id;
@@ -25,17 +27,20 @@ public class Product implements Comparable{
         this.id = id;
     }
 
-    public Product(){
+    public Product() {
 
-    };
-
-    public Double getNetPrice(){
-        return getTotalPrice()*(1-VatEntity.getInstance().getVat());
     }
 
-    public Double getTax(){
+    ;
+
+    public Double getNetPrice() {
+        return getTotalPrice() * (1 - VatEntity.getInstance().getVat());
+    }
+
+    public Double getTax() {
         return 0.0;
     }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -60,7 +65,7 @@ public class Product implements Comparable{
         return result;
     }
 
-    public Product(Long id,String name, String description, Double price) {
+    public Product(Long id, String name, String description, Double price) {
         this.name = name;
         this.description = description;
         this.totalPrice = price;
@@ -83,6 +88,10 @@ public class Product implements Comparable{
         this.description = description;
     }
 
+    public Product(String name) {
+        this.name = name;
+    }
+
     public Double getTotalPrice() {
         return totalPrice;
     }
@@ -91,9 +100,22 @@ public class Product implements Comparable{
         this.totalPrice = totalPrice;
     }
 
+    public Set<Image> getImages() {
+        return images;
+    }
+
+    public void setImages(Set<Image> images) {
+        this.images = images;
+    }
+
     @Override
     public int compareTo(Object o) {
 
-        return (int) (this.getId() - ((Product)o).getId());
+
+        return (int) (this.getId() - ((Product) o).getId());
     }
+
+    @OneToMany(fetch = FetchType.EAGER)
+    @Cascade(org.hibernate.annotations.CascadeType.ALL)
+    Set<Image> images = new HashSet<>();
 }
