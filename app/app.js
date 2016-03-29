@@ -33,7 +33,7 @@ labApp.config(['$routeProvider',
 }]);
 
 labApp.config(function($translateProvider){
-    $translateProvider.useUrlLoader('/messageBundle');
+    $translateProvider.useUrlLoader('http://localhost:8080/messageBundle');
     $translateProvider.useStorage('UrlLanguageStorage');
     $translateProvider.preferredLanguage('en');
     $translateProvider.fallbackLanguage('en');
