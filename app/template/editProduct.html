@@ -6,11 +6,12 @@
         <h1>Edit Product</h1>
     </div>
     <div class="col-md-4">
-        <form name="editform" novalidate>
+        <form name="editform" novalidate flow-init>
             <div class="form-group">
                 <!-- Sidebar content-->
                 <label for="productname">name :</label>
-                <input ng-model="product.name" class="form-control" id="productname" name="productname" placeholder="name" required/>
+                <input ng-model="product.name" class="form-control" id="productname" name="productname"
+                       placeholder="name" required/>
 
                 <div class="alert alert-danger" role="alert" ng-show="editform.productname.$error.required">
                     <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
@@ -45,6 +46,8 @@
                     <span class="sr-only">Error:</span>
                     Enter the number!!
                 </div>
+
+                    <input type="file" flow-btn/>
 
             </div>
 
