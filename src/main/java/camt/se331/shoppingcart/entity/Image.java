@@ -11,7 +11,7 @@ public class Image {
     @Id
     @GeneratedValue
     private Long id;
-
+    public Image(){}
     public Image(String fileName) {
         this.fileName = fileName;
     }
@@ -31,4 +31,20 @@ public class Image {
 
     @Temporal(TemporalType.TIME)
     Date created;
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
+    }
+
+    public void setContentType(String contentType) {
+        this.contentType = contentType;
+    }
+
+    public void setContent(byte[] content) {
+        this.content = content;
+    }
+
+    public void setCreated(Date created) {
+        this.created = created;
+    }
 }
