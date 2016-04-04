@@ -13,7 +13,7 @@ productMainController.controller('addProductController', ['$scope', '$http', '$l
                 // get the product id which the image will be addded
                 var productid = data.id;
                 // set location
-                flowFiles.opts.target = '/productImage/add';
+                flowFiles.opts.target = 'http://localhost:8080/productImage/add';
                 flowFiles.opts.testChunks = false;
                 flowFiles.opts.query = {productid: productid};
                 flowFiles.upload();

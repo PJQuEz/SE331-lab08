@@ -37,7 +37,7 @@ labApp.config(function ($translateProvider) {
     $translateProvider.useStorage('UrlLanguageStorage');
     $translateProvider.preferredLanguage('en');
     $translateProvider.fallbackLanguage('en');
-})
+});
 
 labApp.config(['flowFactoryProvider', function (flowFactoryProvider) {
     flowFactoryProvider.defaults = {

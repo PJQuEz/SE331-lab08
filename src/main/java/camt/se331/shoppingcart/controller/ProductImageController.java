@@ -5,10 +5,7 @@ import camt.se331.shoppingcart.entity.Product;
 import camt.se331.shoppingcart.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -20,34 +17,35 @@ import java.util.Iterator;
 /**
  * Created by พีรพัฒน์ on 3/4/2559.
  */
+@CrossOrigin
 @Controller
-@RequestMapping("/productImage")
+@RequestMapping ("/productImage")
 public class ProductImageController {
-     @Autowired
-     ProductService productService;
-     @RequestMapping(value = "/add",method = RequestMethod.POST)
-     @ResponseBody
-     public Product addImage(HttpServletRequest request,
-                             HttpServletResponse response, @RequestParam("productid")Long productId){
-         MultipartHttpServletRequest mRequest;
-         Product product = productService.getProduct(productId);
-         try{
-             mRequest = (MultipartHttpServletRequest)request;
-             Iterator<String> itr= mRequest.getFileNames();
-             while(itr.hasNext()){
-                 MultipartFile multipartFile = mRequest.getFile(itr.next());
-                 Image image = new Image();
-                 image.setFileName(multipartFile.getName());
-                 image.setContentType(multipartFile.getContentType());
-                 image.setContent(multipartFile.getBytes());;
+    @Autowired
+    ProductService productService;
+
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    @ResponseBody
+    public Product addImage (HttpServletRequest request, HttpServletResponse response,
+                             @RequestParam ("productid") Long productId){
+        MultipartHttpServletRequest mRequest;
+        Product product = productService.getProduct(productId);
+        try{
+            mRequest = (MultipartHttpServletRequest)request;
+            Iterator<String> itr = mRequest.getFileNames();
+            while (itr.hasNext()){
+                MultipartFile multipartFile = mRequest.getFile(itr.next());
+                Image image = new Image();
+                image.setFileName(multipartFile.getName());
+                image.setContentType(multipartFile.getContentType());
+                image.setContent(multipartFile.getBytes());
                 image.setCreated(Calendar.getInstance().getTime());
-                 productService.addImage(product,image);
-                 }
-             }catch (Exception e){
-             e.printStackTrace();
-             }
+                productService.addImage(product,image);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
 
-
-                         return product;
-         }
+        return product;
     }
+}
