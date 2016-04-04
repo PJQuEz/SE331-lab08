@@ -12,9 +12,7 @@ public class Image {
     @GeneratedValue
     private Long id;
     public Image(){}
-    public Image(String fileName) {
-        this.fileName = fileName;
-    }
+
 
     String fileName;
     @Lob

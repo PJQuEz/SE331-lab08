@@ -72,6 +72,14 @@ public class Product implements Comparable {
         this.id = id;
     }
 
+    public Product(Long id, String name, String description, Double price, Image image) {
+        this.name = name;
+        this.description = description;
+        this.totalPrice = price;
+        this.id = id;
+        this.images.add(image);
+    }
+
     public String getName() {
         return name;
     }
